@@ -2,18 +2,4 @@
 
 
 
-@keyframes fadeInSlide {
-    0% {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.fade-in-slide {
-    animation: fadeInSlide 0.8s ease-out forwards;
-}
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
