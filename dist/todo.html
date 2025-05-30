@@ -1,0 +1,107 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="./style.css" rel="stylesheet" />
+    <title>Todo List</title>
+  </head>
+  <body class="bg-white text-black font-sans p-8">
+    <div class="max-w-xl mx-auto">
+      <h1 class="text-4xl font-bold mb-4">Todo App</h1>
+      <p class="text-md mb-4">
+        Hello EveryOne, Welcome To Your favourite Todo Application. See Your
+        Recent Todos Below:
+      </p>
+
+      <ul id="todo-list" class="list-disc pl-6 mb-8 space-y-1">
+        <li>Do Work-out - 8:00 - low</li>
+        <li>Clean Up & Dress - 9:30 - low</li>
+        <li>Study For Ican Exams - 12:45 - High</li>
+      </ul>
+
+      <div class="space-y-4">
+        <h2 class="text-lg font-semibold">Add a new to-do:</h2>
+
+        <div>
+          <label for="title" class="block text-sm font-medium">Title:</label>
+          <input
+            id="title"
+            type="text"
+            class="w-full border border-gray-300 p-2 rounded"
+            placeholder="e.g.,Vacation "
+          />
+        </div>
+
+        <div>
+          <label for="datetime" class="block text-sm font-medium"
+            >Date and Time:</label
+          >
+          <input
+            id="datetime"
+            type="text"
+            class="w-full border border-gray-300 p-2 rounded"
+            placeholder="e.g., December, 10:00"
+          />
+        </div>
+
+        <div>
+          <label for="priority" class="block text-sm font-medium"
+            >Priority:</label
+          >
+          <input
+            id="priority"
+            type="text"
+            class="w-full border border-gray-300 p-2 rounded"
+            placeholder="e.g., High or low"
+          />
+        </div>
+
+        <button
+          onclick="addTodo()"
+          class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+        >
+          Submit
+        </button>
+      </div>
+    </div>
+
+    <script>
+      var todo = "";
+      var todos = JSON.parse(localStorage.getItem("todos")) || [];
+      const list = document.getElementById("todo-list");
+
+      function appendList() {
+        for (let i = 0; i < todos.length; i++) {
+          const element = todos[i];
+          const li = document.createElement("li");
+          li.textContent = element;
+          list.appendChild(li);
+        }
+      }
+
+      document.addEventListener("load", appendList());
+
+      function addTodo() {
+        const title = document.getElementById("title").value;
+        const datetime = document.getElementById("datetime").value;
+        const priority = document.getElementById("priority").value;
+
+        if (title && datetime && priority) {
+          const list = document.getElementById("todo-list");
+          const li = document.createElement("li");
+          todo = `${title} - ${datetime} - ${priority}`;
+          li.textContent = todo;
+          list.appendChild(li);
+
+          todos.push(todo);
+          localStorage.setItem("todos", JSON.stringify(todos));
+          document.getElementById("title").value = "";
+          document.getElementById("datetime").value = "";
+          document.getElementById("priority").value = "";
+        } else {
+          alert("Please fill out all fields.");
+        }
+      }
+    </script>
+  </body>
+</html>
